@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data[0].name}}</h1>
+<div mat-dialog-content>
+  <mdb-carousel [animation]="'slide'">
+    <mdb-carousel-item *ngFor="let image of images">
+      <img class="d-block w-100" [src]="image">
+    </mdb-carousel-item>
+  </mdb-carousel>
+  <p>{{data[0].description}}</p>
+</div>
+<div mat-dialog-actions>
+  <button class="close-button" mat-button [routerLink]='["/details"]' (click)="bookingDetails()">Booking Details</button>
+  <button class="close-button" mat-button (click)="onNoClick()">Close</button>
+</div>

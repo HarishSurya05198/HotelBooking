@@ -1,0 +1,31 @@
+input.ng-invalid {
+  border-left: 5px solid red;
+}
+input.ng-valid{
+  border-left: 5px solid green;
+}
+.card-container{
+  width: 80%;
+  display: flex;
+  margin-left: 10%;
+  margin-top: 2rem;
+}
+
+.content-container{
+  width: 100%;
+}
+
+.register-button{
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+}
+.register-button:hover{
+  color: red;
+}
+.register-button:disabled{
+  cursor: not-allowed;
+}

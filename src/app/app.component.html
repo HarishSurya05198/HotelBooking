@@ -1,0 +1,25 @@
+<nav>
+  <ul class="nav-list">
+    <li class="nav-item">
+      <a [routerLink]='["/home"]'>VHS Booking</a>
+    </li>
+    <li class="nav-item" *ngIf="user == 'null'">
+      <a [routerLink]='["/login"]'>Login</a>
+    </li>
+    <li class="nav-item" *ngIf="user == 'null'">
+      <a [routerLink]='["/register"]'>Register</a>
+    </li>
+    <li class="nav-item dropdown" *ngIf="user != 'null'">
+      <i class="fa fa-user"></i>
+      <a class="dropbtn">
+        {{user.name}}
+      </a>
+      <div class="dropdown-content" *ngIf="user != 'null'">
+        <a href="#">Bookings</a>
+        <a href="#" (click)="logout()">Logout</a>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>

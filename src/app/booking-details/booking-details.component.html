@@ -1,0 +1,38 @@
+<br>
+<mat-card>
+  <div class="container">
+    <div>
+      <mat-card-title >{{roomDetail.name}}</mat-card-title>
+      <img class="room-image" [src]="roomDetail.imageUrls[0]">
+    </div>
+    <div class="fill"></div>
+    <div class="right-div">
+      <mat-card-title> Booking Details </mat-card-title>
+      <mat-divider inset></mat-divider>
+      <p>
+        Name: {{loggedUser.name}}
+      </p>
+      <p>
+        From Date: {{rangeDetail.start}}
+      </p>
+      <p>
+        To Date: {{rangeDetail.end}}
+      </p>
+      <p>
+        Max Count: {{roomDetail.maxCount}}
+      </p>
+      <mat-card-title> Amount </mat-card-title>
+      <mat-divider inset></mat-divider>
+      <p>
+        Total Days:
+      </p>
+      <p>
+        Rent per day: {{roomDetail.rentPerDay}}
+      </p>
+      <p>
+        Total Amount
+      </p>
+      <button class="details-button" mat-button>Pay Now</button>
+    </div>
+  </div>
+</mat-card>

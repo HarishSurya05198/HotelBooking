@@ -1,0 +1,65 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { HotelServiceService } from '../hotel-service.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {RoomDetailsComponent} from '../home/room-details/room-details.component';
+import {FormGroup, FormControl} from '@angular/forms';
+import { DatePipe } from '@angular/common'
+
+export interface DialogData {
+  details:any;
+}
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit {
+  title = 'Hotel-Booking';
+  val = 'getAllRooms';
+  dateRange = {};
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl(),
+  });
+  loaderEnable:boolean = true;
+  roomDetails:any;
+  constructor(
+    private hotelService:HotelServiceService,
+    private datePipe:DatePipe,
+    public dialog: MatDialog
+    ){}
+
+  ngOnInit(){
+    this.hotelService.getRoomDetails(this.val).subscribe((resp)=>{
+      this.loaderEnable = false;
+      this.roomDetails = resp;
+      console.log("Room Details from DB ", this.roomDetails);
+    })
+  }
+
+  openDialog(e:any){
+    var obj = [];
+    obj.push(e);
+    var start = this.datePipe.transform(this.range.value.start , 'dd-MM-YYYY')
+    var end = this.datePipe.transform(this.range.value.end , 'dd-MM-YYYY')
+    this.dateRange = {
+      start: start,
+      end: end,
+    }
+    obj.push({"range":this.dateRange});
+    let dialogRef = this.dialog.open(RoomDetailsComponent, {
+      data: obj,
+      width:'60%',
+      panelClass: 'details-container-class'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  pickerValue(){
+
+  }
+}

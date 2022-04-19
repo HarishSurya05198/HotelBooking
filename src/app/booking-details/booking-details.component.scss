@@ -1,0 +1,35 @@
+@import url('../../styles.scss');
+
+.card-container {
+  display: flex;
+  justify-content: space-between;
+}
+.container{
+  display: flex;
+}
+.fill{
+  flex: 0;
+}
+
+.room-image{
+  height: 80%;
+  width: 75%;
+}
+
+.details-button{
+  width: 60%;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+}
+.details-button:hover{
+  color: red;
+}
+
+p{
+  font-weight: bold;
+}
+
+.right-div{
+  width: 30% !important;
+}

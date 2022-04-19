@@ -1,0 +1,24 @@
+<mat-card class="card-container">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content-container">
+    <div class="container">
+      <form [formGroup]="userLogin" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" formControlName="email">
+              <div *ngIf="userLogin.controls['email'].hasError('pattern')" class="alert alert-danger">Enter a valid email</div>
+          </div>
+
+          <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" formControlName="password">
+          </div>
+          <div *ngIf="errorLogin" class="alert alert-danger">Enter valid Email ID or Credentials</div>
+          <button type="submit" [disabled]="!userLogin.valid" class="login-button">Login</button>
+      </form>
+  </div>
+  </mat-card-content>
+</mat-card>
+<sa-spinner-dotted [enabled]="loaderEnable" styles='{"color": "red"}'></sa-spinner-dotted>
