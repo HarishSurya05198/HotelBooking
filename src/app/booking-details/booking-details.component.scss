@@ -25,7 +25,11 @@
 .details-button:hover{
   color: red;
 }
-
+.details-button:disabled{
+  background-color: grey;
+  color: white;
+  cursor: not-allowed;
+}
 p{
   font-weight: bold;
 }

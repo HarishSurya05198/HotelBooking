@@ -10,11 +10,8 @@
   <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-date-range-picker #picker></mat-date-range-picker>
-
-  <!-- <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-  <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
 </mat-form-field>
-
+<div *ngIf="dateError" class="alert alert-danger">Please select a date range</div>
 <div class="flex-container">
   <div *ngFor="let i of roomDetails" (click)="pickerValue()">
 
@@ -33,6 +30,7 @@
           <p>Type: {{i.type}}</p>
       </mat-card-content>
       <mat-card-actions>
+        <button class="close-button" mat-button (click)="bookingDetails(i)">Booking Details</button>
         <button class="details-button" mat-button (click)="openDialog(i)">View Details</button>
       </mat-card-actions>
     </mat-card>

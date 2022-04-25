@@ -9,29 +9,8 @@ import { HotelServiceService } from 'src/app/hotel-service.service';
   styleUrls: ['./room-details.component.scss']
 })
 export class RoomDetailsComponent implements OnInit {
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: false,
-    touchDrag: false,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    responsive: {
-      0: {
-        items: 1
-      },
-      400: {
-        items: 2
-      },
-      740: {
-        items: 3
-      },
-      940: {
-        items: 4
-      }
-    },
-    nav: true
-  }
+  disableBooking:boolean = false;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   public dialog: MatDialog,
   private hotelService:HotelServiceService) { }
@@ -39,13 +18,14 @@ export class RoomDetailsComponent implements OnInit {
   images = this.data[0].imageUrls;
 
   ngOnInit(): void {
-    console.log("what is in data ",this.data);
+    if(this.data[1].range.start == null && this.data[1].range.end){
+      this.disableBooking = true;
+    }
+    else{
+      this.disableBooking = false;
+    }
   }
   onNoClick(): void {
-    this.dialog.closeAll();
-  }
-  bookingDetails(){
-    this.hotelService.roomDetail = this.data;
     this.dialog.closeAll();
   }
 }

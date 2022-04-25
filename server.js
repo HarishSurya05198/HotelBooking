@@ -4,6 +4,7 @@ const app = express();
 const dbConfig = require('./db');
 const roomsRoute = require('./routes/roomsRoute');
 const userRoute = require('./routes/userRoute');
+const bookingRoute = require('./routes/bookingRoute');
 const cors = require('cors');
 const port = process.env.PORT || 4000;
 
@@ -26,5 +27,6 @@ app.use(function(req, res, next) {
 });
 app.use(cors())
 app.use('/api/rooms',roomsRoute);
-app.use('/api/user',userRoute)
+app.use('/api/user',userRoute);
+app.use('/api/booking',bookingRoute);
 app.listen(port, ()=>console.log("Harish Surya server running on port ",port))

@@ -10,7 +10,7 @@
       <mat-card-title> Booking Details </mat-card-title>
       <mat-divider inset></mat-divider>
       <p>
-        Name: {{loggedUser.name}}
+        Name: {{name}}
       </p>
       <p>
         From Date: {{rangeDetail.start}}
@@ -24,15 +24,16 @@
       <mat-card-title> Amount </mat-card-title>
       <mat-divider inset></mat-divider>
       <p>
-        Total Days:
+        Total Days: {{rangeDetail.difference}}
       </p>
       <p>
         Rent per day: {{roomDetail.rentPerDay}}
       </p>
       <p>
-        Total Amount
+        Total Amount: {{totalAmount}}
       </p>
-      <button class="details-button" mat-button>Pay Now</button>
+      <button class="details-button" [disabled]="disableButton" (click)="payNow()" mat-button>Pay Now</button>
     </div>
   </div>
 </mat-card>
+<sa-spinner-dotted [enabled]="loaderEnable" styles='{"color": "red"}'></sa-spinner-dotted>
