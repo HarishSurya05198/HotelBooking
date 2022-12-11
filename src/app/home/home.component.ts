@@ -17,7 +17,7 @@ export interface DialogData {
 })
 export class HomeComponent implements OnInit {
   title = 'Hotel-Booking';
-  val = 'getAllRooms';
+  val = 'get/allHotels';
   dateRange = {};
   range = new FormGroup({
     start: new FormControl(),
