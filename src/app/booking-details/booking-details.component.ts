@@ -30,7 +30,7 @@ export class BookingDetailsComponent implements OnInit {
     }
     this.roomDetail = this.hotelService.roomDetail[0];
     this.rangeDetail = this.hotelService.roomDetail[1].range;
-    this.totalAmount = this.roomDetail.rentPerDay * this.rangeDetail.difference;
+    this.totalAmount = this.roomDetail.rent * this.rangeDetail.difference;
   }
   payNow(){
     this.loaderEnable = true;

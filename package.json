@@ -24,6 +24,7 @@
     "@material/card": "^13.0.0",
     "angular-bootstrap-md": "^13.0.0",
     "angular-mat-datepicker": "^0.0.2",
+    "angular-material": "^1.2.5",
     "animate.css": "^4.1.1",
     "cors": "^2.8.5",
     "mongoose": "^6.2.9",
