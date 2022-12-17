@@ -15,7 +15,7 @@ export class RoomDetailsComponent implements OnInit {
   public dialog: MatDialog,
   private hotelService:HotelServiceService) { }
 
-  images = this.data[0].imageUrls;
+  images = this.data[0].images;
 
   ngOnInit(): void {
     if(this.data[1].range.start == null && this.data[1].range.end){
