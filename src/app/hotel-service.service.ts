@@ -26,7 +26,7 @@ export class HotelServiceService {
     return this.httpService.post(this.baseBookingSlot+val,obj);
   }
   loginUser(val: string, obj:any){
-    return this.httpService.post(this.baseUserSlot+val,obj);
+    return this.httpService.put(this.baseUserSlot+val,obj);
   }
   sendRefresh(message:any){
     this.loginDetail = message;

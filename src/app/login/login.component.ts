@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.errorLogin = false;
     this.loaderEnable = true;
     let obj = this.userLogin.value;
-    this.hotelService.registerUser(this.val,obj).subscribe((resp)=>{
+    this.hotelService.loginUser(this.val,obj).subscribe((resp)=>{
       this.loaderEnable = false;
       this.hotelService.sendRefresh(resp);
       this.openSnackBar();
