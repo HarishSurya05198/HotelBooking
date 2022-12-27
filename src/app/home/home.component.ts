@@ -56,8 +56,8 @@ export class HomeComponent implements OnInit {
   setObject(e:any){
     var obj = [];
     obj.push(e);
-    var start = this.datePipe.transform(this.range.value.start , 'dd-MM-YYYY')
-    var end = this.datePipe.transform(this.range.value.end , 'dd-MM-YYYY')
+    var start = this.datePipe.transform(this.range.value.start , 'YYYY-MM-dd')
+    var end = this.datePipe.transform(this.range.value.end , 'YYYY-MM-dd')
     var diff = Math.floor((Date.UTC(this.range.value.end.getFullYear(), this.range.value.end.getMonth(), this.range.value.end.getDate()) - Date.UTC(this.range.value.start.getFullYear(), this.range.value.start.getMonth(), this.range.value.start.getDate()) ) /(1000 * 60 * 60 * 24));
     this.dateRange = {
       start: start,

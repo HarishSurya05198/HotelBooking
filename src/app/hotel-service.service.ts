@@ -8,7 +8,7 @@ export class HotelServiceService {
   baseUrl = 'http://localhost:4000/';
   baseRoomSlot = 'api/rooms/';
   baseUserSlot = 'api/user/';
-  baseBookingSlot = 'api/booking/';
+  baseBookSlot = 'api/v1/';
   roomDetail:any;
   loginDetail:any;
   private reloadLogin = new Subject<any>();
@@ -23,7 +23,7 @@ export class HotelServiceService {
     return this.httpService.post(this.baseUserSlot+val,obj);
   }
   bookRoom(val: string, obj:any){
-    return this.httpService.post(this.baseBookingSlot+val,obj);
+    return this.httpService.post(this.baseBookSlot+val,obj);
   }
   loginUser(val: string, obj:any){
     return this.httpService.put(this.baseUserSlot+val,obj);

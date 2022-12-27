@@ -14,7 +14,7 @@ export class BookingDetailsComponent implements OnInit {
   totalAmount:number | undefined;
   disableButton:boolean = false;
   loaderEnable:boolean = false;
-  val:string = 'bookRoom';
+  val:string = 'add/booking';
   constructor(private hotelService:HotelServiceService,
     private snackBar:MatSnackBar) { }
 
@@ -35,15 +35,11 @@ export class BookingDetailsComponent implements OnInit {
   payNow(){
     this.loaderEnable = true;
     var obj = {
-      room:this.roomDetail.name,
-      roomId:this.roomDetail._id,
-      userId:this.loggedUser.name,
-      fromDate:this.rangeDetail.start,
-      toDate:this.rangeDetail.end,
-      totalAmount:this.totalAmount,
-      totalDays:this.rangeDetail.difference,
-      status:'Booked',
-      transactionId:'1234',
+      hotel_id:this.roomDetail.id,
+      user_id:this.loggedUser.id,
+      start_date:this.rangeDetail.start,
+      end_date:this.rangeDetail.end,
+      total_amount:this.totalAmount,
     }
     this.hotelService.bookRoom(this.val,obj).subscribe((resp)=>{
       this.loaderEnable = false;
