@@ -18,6 +18,7 @@ export interface DialogData {
 export class HomeComponent implements OnInit {
   title = 'Hotel-Booking';
   val = 'get/hotels';
+  avail = 'get/hotelsForDates?start_date=';
   dateRange = {};
   range = new FormGroup({
     start: new FormControl(),
@@ -34,11 +35,7 @@ export class HomeComponent implements OnInit {
     ){}
 
   ngOnInit(){
-    this.hotelService.getRoomDetails(this.val).subscribe((resp)=>{
-      this.loaderEnable = false;
-      this.roomDetails = resp;
-      console.log("Room Details from DB ", this.roomDetails);
-    })
+    this.checkAvail();
   }
 
   openDialog(e:any){
@@ -53,9 +50,26 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  setObject(e:any){
-    var obj = [];
-    obj.push(e);
+  checkAvail(){
+    var start = this.datePipe.transform(this.range.value.start , 'YYYY-MM-dd')
+    var end = this.datePipe.transform(this.range.value.end , 'YYYY-MM-dd')
+    if(start != null && end != null){
+      console.log("it is working in",this.avail+start+'&end_date='+end);
+      this.hotelService.getAvailRooms(this.avail+start+'&end_date='+end).subscribe((resp)=>{
+        this.loaderEnable = false;
+        this.roomDetails = resp;
+      })
+    }
+    else{
+      this.hotelService.getRoomDetails(this.val).subscribe((resp)=>{
+      this.loaderEnable = false;
+      this.roomDetails = resp;
+      console.log("Room Details from DB ", this.roomDetails);
+    })
+    }
+  }
+
+  addDateRange(){
     var start = this.datePipe.transform(this.range.value.start , 'YYYY-MM-dd')
     var end = this.datePipe.transform(this.range.value.end , 'YYYY-MM-dd')
     var diff = Math.floor((Date.UTC(this.range.value.end.getFullYear(), this.range.value.end.getMonth(), this.range.value.end.getDate()) - Date.UTC(this.range.value.start.getFullYear(), this.range.value.start.getMonth(), this.range.value.start.getDate()) ) /(1000 * 60 * 60 * 24));
@@ -64,7 +78,14 @@ export class HomeComponent implements OnInit {
       end: end,
       difference: diff,
     }
-    obj.push({"range":this.dateRange});
+    return this.dateRange;
+  }
+
+  setObject(e:any){
+    var obj = [];
+    obj.push(e);
+    var range = this.addDateRange();
+    obj.push({"range":range});
     return obj;
   }
 

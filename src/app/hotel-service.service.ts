@@ -19,6 +19,10 @@ export class HotelServiceService {
     return this.httpService.get(this.baseRoomSlot+val);
   }
 
+  getAvailRooms(val:string){
+    return this.httpService.get(this.baseRoomSlot+val);
+  }
+
   registerUser(val: string, obj:any){
     return this.httpService.post(this.baseUserSlot+val,obj);
   }
