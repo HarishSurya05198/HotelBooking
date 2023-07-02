@@ -45,6 +45,14 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  onOtpChange(e:any){
+    var otp;
+    if(e.length == 4){
+      otp = e;
+    }
+    console.log("value in otp :",otp);
+  }
+
   openSnackBar() {
     this.snackBar.open('Login Success !','', {
       duration: 3000,
