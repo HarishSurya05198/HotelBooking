@@ -9,8 +9,10 @@ export class HotelServiceService {
   baseRoomSlot = 'api/rooms/';
   baseUserSlot = 'api/user/';
   baseBookSlot = 'api/v1/';
+  otpSlot = 'api/otp/';
   roomDetail:any;
   loginDetail:any;
+  OtpVerFlag:Boolean = false;
   private reloadLogin = new Subject<any>();
 
   constructor(private httpService:HttpClient) { }
@@ -23,6 +25,13 @@ export class HotelServiceService {
     return this.httpService.get(this.baseRoomSlot+val);
   }
 
+  sendOtp(val: string, obj:any){
+    return this.httpService.post(this.otpSlot+val,obj);
+  }
+  verifyOtp(val: string, obj:any){
+    return this.httpService.post(this.otpSlot+val,obj);
+  }
+
   registerUser(val: string, obj:any){
     return this.httpService.post(this.baseUserSlot+val,obj);
   }
@@ -30,7 +39,7 @@ export class HotelServiceService {
     return this.httpService.post(this.baseBookSlot+val,obj);
   }
   loginUser(val: string, obj:any){
-    return this.httpService.put(this.baseUserSlot+val,obj);
+    return this.httpService.post(this.baseUserSlot+val,obj);
   }
   sendRefresh(message:any){
     this.loginDetail = message;

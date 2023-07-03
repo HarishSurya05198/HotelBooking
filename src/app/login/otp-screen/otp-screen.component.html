@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Enter OTP to verify</h1>
+<div mat-dialog-content>
+  <div>
+    <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:4}"></ng-otp-input>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button class="close-button" mat-button (click)="onNoClick()">Close</button>
+</div>

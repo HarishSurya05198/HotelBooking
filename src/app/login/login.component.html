@@ -16,9 +16,6 @@
               <input type="password" class="form-control" formControlName="password">
           </div>
           <div *ngIf="errorLogin" class="alert alert-danger">Enter valid Email ID or Credentials</div>
-          <div [hidden]="!userLogin.valid">
-            <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:4}"></ng-otp-input>
-          </div>
           <button type="submit" [disabled]="!userLogin.valid" class="login-button">Login</button>
       </form>
   </div>

@@ -1,13 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormControl,Validators, FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { HotelServiceService } from '../hotel-service.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { OtpScreenComponent } from './otp-screen/otp-screen.component';
+
+export interface DialogData {
+  details:any;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   userLogin!: FormGroup;
   val = 'login';
@@ -21,6 +29,7 @@ export class LoginComponent implements OnInit {
     private _formbuilder: FormBuilder,
     private router:Router,
     private hotelService:HotelServiceService,
+    public dialog: MatDialog,
     private snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
@@ -35,9 +44,13 @@ export class LoginComponent implements OnInit {
     this.loaderEnable = true;
     let obj = this.userLogin.value;
     this.hotelService.loginUser(this.val,obj).subscribe((resp)=>{
-      this.loaderEnable = false;
-      this.hotelService.sendRefresh(resp);
-      this.openSnackBar();
+      let otpver = this.openOtp(resp);
+      console.log("check value ",this.hotelService.OtpVerFlag);
+      if(this.hotelService.OtpVerFlag == true){
+        this.loaderEnable = false;
+        this.hotelService.sendRefresh(resp);
+        this.openSnackBar();
+      }
     },
     (error)=>{
       this.errorLogin = true;
@@ -45,12 +58,18 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onOtpChange(e:any){
-    var otp;
-    if(e.length == 4){
-      otp = e;
+  openOtp(obj:any){
+    var payload = {
+      "phone_number":obj.phone_number
     }
-    console.log("value in otp :",otp);
+    this.hotelService.sendOtp("send-phone",payload).subscribe((resp)=>{
+      console.log(resp);
+    })
+    this.dialog.open(OtpScreenComponent, {
+      data: obj,
+      width:'60%',
+      panelClass: 'details-container-class'
+    })
   }
 
   openSnackBar() {

@@ -1,0 +1,40 @@
+@import url('../../../styles.scss');
+
+.image-height{
+  height: 415px !important;
+}
+
+.view {
+  height: 50vh;
+}
+/* Full Page Carousel itself*/
+.carousel {
+  height: 50vh;
+}
+.carousel .carousel-inner {
+  height: 50vh;
+}
+.carousel .carousel-inner .carousel-item,
+.carousel .carousel-inner .active {
+  height: 50vh;
+}
+img {
+  &.d-block {
+    height: 50vh;
+  }
+}
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+.close-button{
+  width: 15%;
+  margin-left: 1rem;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+}
+.close-button:hover{
+  color: red;
+}

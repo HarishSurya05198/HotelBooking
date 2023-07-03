@@ -27,6 +27,7 @@ import { RoomDetailsComponent } from './home/room-details/room-details.component
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {OtpScreenComponent} from './login/otp-screen/otp-screen.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RegisterComponent } from './register/register.component';
     RoomDetailsComponent,
     BookingDetailsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    OtpScreenComponent
   ],
   imports: [
     BrowserModule,
