@@ -44,31 +44,32 @@ export class LoginComponent implements OnInit {
     this.loaderEnable = true;
     let obj = this.userLogin.value;
     this.hotelService.loginUser(this.val,obj).subscribe((resp)=>{
-      let otpver = this.openOtp(resp);
-      console.log("check value ",this.hotelService.OtpVerFlag);
-      if(this.hotelService.OtpVerFlag == true){
-        this.loaderEnable = false;
-        this.hotelService.sendRefresh(resp);
-        this.openSnackBar();
+      var object:any = resp;
+      var payload = {
+        "phone_number":object.phone_number
       }
+      this.hotelService.sendOtp("send-phone",payload).subscribe((response)=>{
+        var data:any = response;
+        if(data.message == "OTP Sent Successfully"){
+          let otpflag = this.dialog.open(OtpScreenComponent, {
+            data: object,
+            width:'60%',
+            panelClass: 'details-container-class'
+          })
+  
+          otpflag.afterClosed().subscribe(result =>{
+            if(result == true){
+              this.loaderEnable = false;
+              this.hotelService.sendRefresh(resp);
+              this.openSnackBar();
+            }
+          })
+        }
+      })
     },
     (error)=>{
       this.errorLogin = true;
       this.loaderEnable = false;
-    })
-  }
-
-  openOtp(obj:any){
-    var payload = {
-      "phone_number":obj.phone_number
-    }
-    this.hotelService.sendOtp("send-phone",payload).subscribe((resp)=>{
-      console.log(resp);
-    })
-    this.dialog.open(OtpScreenComponent, {
-      data: obj,
-      width:'60%',
-      panelClass: 'details-container-class'
     })
   }
 

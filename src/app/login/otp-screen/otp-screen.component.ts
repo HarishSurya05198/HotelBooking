@@ -1,5 +1,5 @@
 import {Component,OnInit, Inject} from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { HotelServiceService } from 'src/app/hotel-service.service';
 
@@ -12,6 +12,7 @@ export class OtpScreenComponent implements OnInit {
   disableBooking:boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+  public dailogRef:MatDialogRef<OtpScreenComponent>,
   public dialog: MatDialog,
   private hotelService:HotelServiceService) { }
 
@@ -36,15 +37,16 @@ export class OtpScreenComponent implements OnInit {
       "otp":otp
     }
     this.hotelService.verifyOtp("verify-phone",payload).subscribe(resp=>{
-      this.hotelService.OtpVerFlag = true;
-      if(resp == "OTP Verified Successfully"){
+      var data:any = resp;  
+      if(data.message == "OTP Verified Successfully"){
+        this.hotelService.OtpVerFlag = true;
         console.log("getting inside condition");
+        this.onNoClick(true);
       }
-      this.onNoClick();
     })
   }
 
-  onNoClick(): void {
-    this.dialog.closeAll();
+  onNoClick(val:boolean): void {
+    this.dailogRef.close(val);
   }
 }
